@@ -1,0 +1,4 @@
+activities
+==========
+
+In-class activities
