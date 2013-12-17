@@ -1,3 +1,5 @@
+# require 'bundler'
+# Bundler.require
 require 'sinatra/base'
 
 module Game
@@ -37,7 +39,5 @@ module Game
 
         end
 
-    end
-
-
+      end
 end
