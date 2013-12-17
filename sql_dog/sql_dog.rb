@@ -27,6 +27,7 @@ class Dog
     db.query("insert into dogs(name, color)
       VALUES('#{self.name}', '#{self.color}')
       ")
+      self.id = db.last_id
   end
 
 
@@ -48,14 +49,47 @@ class Dog
       WHERE color = '#{color}' ").first
   end
 
+  # def mark_saved!
+  #   self.id = self.db.last_id if self.db.last_id > 0
+  # end
+
+  #save for later, 
+  def update
+    #if mark_saved! == true
+      self.db.query("
+        UPDATE dogs
+        SET name = '#{name}', color ='#{color}'
+        WHERE id = #{self.id}
+        ")
+    # else
+    #   puts "sorry, nothing to update, the puppy doesn't exist!"
+    # end
+  end
+
+  def save
+    if self.id > 0
+      self.update
+    else
+      self.insert
+    end
+    #if it has been saved, update
+    #if it hasn't been saved, insert
+  end
+
+
+
+
+
 
 
  
 end
 
-#pup = Dog.new("fido", "yellow")
-pup = Dog.find_by_name("fido") 
-puts pup
+pup = Dog.new("sparky", "pink")
+pup.insert
+pup.update(2)
+# pup = Dog.find_by_name("fido") 
+# puts pup
 #puts pup.methods-Object.methods
 #Dog.find_by_att(1)
  
@@ -65,9 +99,8 @@ puts pup
  
   # color, name, id
   # db
-  # find_by_att
-  # find
-  # insert
+
+
   # update
   # delete/destroy
  
