@@ -40,26 +40,36 @@ class Dog
     temp.each do |item|
       temp_array << Dog.new(item["name"], item["color"], item["id"])
     end
-    temp_array
+    temp_array.first
   end
 
   def self.find_by_name(name)
-    self.db.query("SELECT *
+    temp_array = []
+    temp = self.db.query("SELECT *
       FROM dogs
       WHERE name = '#{name}' ").first
+    temp.each do |item|
+      temp_array << Dog.new(item["name"], item["color"], item["id"])
+    end
+    temp_array.first
   end
 
   def self.find_by_color(color)
-    self.db.query("SELECT *
+    temp_array = []
+    temp = self.db.query("SELECT *
       FROM dogs
       WHERE color = '#{color}' ").first
+    temp.each do |item|
+      temp_array << Dog.new(item["name"], item["color"], item["id"])
+    end
+    temp_array.first
   end
 
   def mark_saved!
     self.id = self.db.last_id if self.db.last_id > 0
   end
 
-  #save for later, 
+
   def update
     # if
     # mark_saved! 
@@ -83,7 +93,7 @@ class Dog
     #if it hasn't been saved, insert
   end
 
-  def self.delete(id)
+  def self.delete_by_id(id)
     #if marked_saved! == true
       self.db.query("
         DELETE FROM dogs
@@ -93,13 +103,18 @@ class Dog
     # end
   end
 
+  def self.delete_by_name(name)
+    self.db.query("
+      DELETE FROM dogs
+      WHERE name = '#{name}'")
+  end
 
-
-
-
-
-
- 
+  def self.delete_by_name(color)
+    self.db.query("
+      DELETE FROM dogs
+      WHERE name = '#{color}'")
+  end
+   
 end
 
 
