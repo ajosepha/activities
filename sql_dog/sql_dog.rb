@@ -3,11 +3,12 @@ require 'debugger'
 
  
 class Dog
-  attr_accessor :id, :name, :color 
+  attr_accessor :name, :color, :id 
 
-  def initialize(name, color)
+  def initialize(name, color, id=nil)
     @name = name
     @color = color
+    @id = id
   end
 
   @@db = Mysql2::Client.new(
@@ -32,9 +33,14 @@ class Dog
 
 
   def self.find_by_id(id)
-    self.db.query("SELECT *
+    temp_array = []
+    temp =self.db.query("SELECT *
       FROM dogs
-      WHERE id = #{id}").first
+      WHERE id = #{id}")
+    temp.each do |item|
+      temp_array << Dog.new(item["name"], item["color"], item["id"])
+    end
+    temp_array
   end
 
   def self.find_by_name(name)
