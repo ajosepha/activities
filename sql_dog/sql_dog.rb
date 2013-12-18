@@ -49,21 +49,22 @@ class Dog
       WHERE color = '#{color}' ").first
   end
 
-  # def mark_saved!
-  #   self.id = self.db.last_id if self.db.last_id > 0
-  # end
+  def mark_saved!
+    self.id = self.db.last_id if self.db.last_id > 0
+  end
 
   #save for later, 
   def update
-    #if mark_saved! == true
-      self.db.query("
+    # if
+    # mark_saved! 
+      db.query("
         UPDATE dogs
         SET name = '#{name}', color ='#{color}'
         WHERE id = #{self.id}
         ")
-    # else
-    #   puts "sorry, nothing to update, the puppy doesn't exist!"
-    # end
+     # else
+     #  puts "sorry, nothing to update, the puppy doesn't exist!"
+     # end
   end
 
   def save
@@ -76,6 +77,16 @@ class Dog
     #if it hasn't been saved, insert
   end
 
+  def self.delete(id)
+    #if marked_saved! == true
+      self.db.query("
+        DELETE FROM dogs
+        WHERE id = #{id}")
+    # else
+    #   puts "sorry, no record there."
+    # end
+  end
+
 
 
 
@@ -85,9 +96,7 @@ class Dog
  
 end
 
-pup = Dog.new("sparky", "pink")
-pup.insert
-pup.update(2)
+
 # pup = Dog.find_by_name("fido") 
 # puts pup
 #puts pup.methods-Object.methods
