@@ -1,0 +1,25 @@
+.button {
+  color: #2F4F4F;
+  background-color: #ededed;
+  height: 100px;
+  width: 250px;
+  text-align: center;
+  line-height: 100px;
+  font-size: 1.5em;
+  border: 3px solid #6E6E6E;
+  border-radius: 25px;
+  box-shadow: 0 0 0 6px #fff, 0 0 0 12px #888;
+  font: arial;
+}
+
+.right_star {
+  position: absolute;
+  top: 35px;
+  left: 20px;
+}
+
+.left_star {
+  position: absolute;
+  top: 35px;
+  left: 215px;
+}
